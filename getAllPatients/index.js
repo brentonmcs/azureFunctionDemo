@@ -15,7 +15,6 @@ module.exports = function (context, req) {
     function init(initCallback) {
 
         if (collection) {
-            context.log('not reconnecting');
             initCallback();
             return;
         }
@@ -30,10 +29,7 @@ module.exports = function (context, req) {
 
                     } else {
                         collection = coll;
-
-                        context.log('reconnecting');
                         initCallback();
-
                     }
                 });
             }
@@ -46,7 +42,9 @@ module.exports = function (context, req) {
         }).toArray(function (err, results) {
             context.res = {
                 status: 200,
-                body: results
+                body: results.map(function (item) {
+                    return { name :item.name, treatment : item.treatment}
+                })
             };
             context.done();
         });
