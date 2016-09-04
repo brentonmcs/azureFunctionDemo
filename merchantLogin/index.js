@@ -1,7 +1,7 @@
 ﻿module.exports = function (context, req) {
 
     var jwt = require('jsonwebtoken');
-    var dbUtils = require('../docDBUtils');
+    var dbUtils = require('./docDBUtils');
 
     if (!req.query.username) {
         context.log(req);
