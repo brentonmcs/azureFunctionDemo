@@ -5,7 +5,7 @@ module.exports = function (context, req) {
 
     var dbUtils = require('./docdbUtils');
 
-    dbUtils.connect(databaseId, collectionId, function () {
+    dbUtils.connect(databaseId, collectionId, context, function () {
         dbUtils.findArray({
             query: 'SELECT * FROM root r'
         }, function (err, results) {
