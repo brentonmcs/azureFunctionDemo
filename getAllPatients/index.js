@@ -3,8 +3,10 @@ var collectionId = "Patients";
 
 module.exports = function (context, req) {
 
-    require('./docdbUtils').connect(databaseId, collectionId, function () {
-        findArray({
+    var dbUtils = require('./docdbUtils');
+
+    dbUtils.connect(databaseId, collectionId, function () {
+        dbUtils.findArray({
             query: 'SELECT * FROM root r'
         }, function (err, results) {
 
