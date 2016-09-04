@@ -5,6 +5,7 @@ module.exports = function (context, req) {
     var dbUtils = require('../getAllPatients/docDBUtils');
 
     if (!req.query.username) {
+        context.log(req);
         context.res = {
             status: 400,
             body: "username is required"
@@ -12,7 +13,7 @@ module.exports = function (context, req) {
         context.done();
         return;
     }
-    
+
     dbUtils.connect("smiledb", "merchants", function () {
         dbUtils.findArray({
             query: "SELECT * FROM root r  WHERE r.username = @username",
