@@ -14,7 +14,7 @@ module.exports = function (context, req) {
         return;
     }
 
-    dbUtils.connect("smiledb", "merchants", function () {
+    dbUtils.connect("smiledb", "merchants", connext, function () {
         dbUtils.findArray({
             query: "SELECT * FROM root r  WHERE r.username = @username",
             parameters: [{

@@ -2,7 +2,7 @@ var DocumentClient = require('documentdb').DocumentClient;
 
 var database = null;
 var collection = null;
-
+var _context;
 var client = new DocumentClient(process.env.DocumentDb, {
     masterKey: process.env.ApiKey
 });
@@ -18,8 +18,8 @@ function getOrCreateDatabase(client, databaseId, callback) {
 
     client.queryDatabases(querySpec).toArray(function (err, results) {
         if (err) {
+            _context.log(err);
             callback(err);
-
         } else {
             if (results.length === 0) {
                 var databaseSpec = {
@@ -48,6 +48,7 @@ function getOrCreateCollection(client, databaseLink, collectionId, callback) {
 
     client.queryCollections(databaseLink, querySpec).toArray(function (err, results) {
         if (err) {
+            _context.log(err);
             callback(err);
 
         } else {
@@ -56,9 +57,7 @@ function getOrCreateCollection(client, databaseLink, collectionId, callback) {
                     id: collectionId
                 };
 
-                client.createCollection(databaseLink, collectionSpec, function (err, created) {
-                    callback(null, created);
-                });
+                client.createCollection(databaseLink, collectionSpec, callback);
 
             } else {
                 callback(null, results[0]);
@@ -71,15 +70,17 @@ var DocDBUtils = {
     findArray: function (query, callback) {
         client.queryDocuments(collection._self, query).toArray(callback);
     },
-    connect: function (databaseId, collectionId, initCallback) {
+    connect: function (databaseId, collectionId, context, initCallback) {
 
         if (collection) {
             initCallback();
             return;
         }
 
+        _context = context;
         getOrCreateDatabase(client, databaseId, function (err, db) {
             if (err) {
+                _context.log(err);
                 callback(err);
             } else {
                 database = db;
