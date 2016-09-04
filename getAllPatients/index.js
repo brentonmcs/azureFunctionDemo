@@ -1,4 +1,4 @@
-var databaseId = "Patients";
+var databaseId = "smiledb";
 var collectionId = "Patients";
 
 module.exports = function (context, req) {
