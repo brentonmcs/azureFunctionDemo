@@ -23,6 +23,10 @@ module.exports = function (context, req) {
             }]
         }, function (err, results) {
 
+            context.log(results);
+            if (err) {
+                context.log(err);
+            }
             if (results.length === 0) {
                 context.res = {
                     status: 400,
@@ -38,6 +42,6 @@ module.exports = function (context, req) {
                 };
             }
             context.done();
-        })
-    })
+        });
+    });
 };
