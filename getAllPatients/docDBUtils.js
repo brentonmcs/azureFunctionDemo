@@ -1,4 +1,4 @@
-var DocumentDBClient = require('documentdb').DocumentClient;
+var DocumentClient = require('documentdb').DocumentClient;
 
 var database = null;
 var collection = null;
