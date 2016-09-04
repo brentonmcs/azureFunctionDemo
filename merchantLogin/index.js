@@ -1,8 +1,7 @@
-﻿
-module.exports = function (context, req) {
+﻿module.exports = function (context, req) {
 
     var jwt = require('jsonwebtoken');
-    var dbUtils = require('../getAllPatients/docDBUtils');
+    var dbUtils = require('../docDBUtils');
 
     if (!req.query.username) {
         context.log(req);
@@ -14,7 +13,12 @@ module.exports = function (context, req) {
         return;
     }
 
+    if (!dbUtils) {
+        context.log('utils not found');
+    }
     dbUtils.connect("smiledb", "merchants", context, function () {
+
+        context.log('connected?');
         dbUtils.findArray({
             query: "SELECT * FROM root r  WHERE r.username = @username",
             parameters: [{
