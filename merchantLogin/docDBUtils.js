@@ -83,8 +83,7 @@ var DocDBUtils = {
                 _context.log(err);
                 callback(err);
             } else {
-                database = db;
-                getOrCreateCollection(client, database._self, collectionId, function (err, coll) {
+                getOrCreateCollection(client, db._self, collectionId, function (err, coll) {
                     if (err) {
                         callback(err);
 
