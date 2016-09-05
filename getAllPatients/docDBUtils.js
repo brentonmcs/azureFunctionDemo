@@ -25,7 +25,7 @@ function getOrCreateDatabase(client, databaseId, callback) {
                 var databaseSpec = {
                     id: databaseId
                 };
-
+                _context.log('creating database');
                 client.createDatabase(databaseSpec, function (err, created) {
                     callback(null, created);
                 });
