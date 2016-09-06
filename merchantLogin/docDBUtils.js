@@ -3,8 +3,8 @@ var DocumentClient = require('documentdb').DocumentClient;
 var database = null;
 var collection = null;
 var _context;
-var client = new DocumentClient("https://tesdocbmc.documents.azure.com:443/", {
-    masterKey: 'vhqzwxpv0w4ThvqA8xt6jBtOIBMTL25FI98Www10c1GSAkL0q9L0A72l4AkAscv0qkgZQPSJvGurENjSXr0F6A=="'
+var client = new DocumentClient(process.env.DocumentDb, {
+    masterKey: process.env.ApiKey
 });
 
 function getOrCreateDatabase(client, databaseId, callback) {
@@ -16,20 +16,17 @@ function getOrCreateDatabase(client, databaseId, callback) {
         }]
     };
 
-
-
     client.queryDatabases(querySpec).toArray(function (err, results) {
-
         if (err) {
             _context.log(err);
-            _context.done(err);
+            callback(err);
         } else {
             if (results.length === 0) {
-                client.createDatabase({
+                var databaseSpec = {
                     id: databaseId
-                }, function (err2, created) {
-                    _context.log(err2);
-                    _context.log(created);
+                };
+                _context.log('creating database');
+                client.createDatabase(databaseSpec, function (err, created) {
                     callback(null, created);
                 });
 
@@ -82,15 +79,15 @@ var DocDBUtils = {
 
         _context = context;
         getOrCreateDatabase(client, databaseId, function (err, db) {
-
             if (err) {
                 _context.log(err);
                 callback(err);
             } else {
-                getOrCreateCollection(client, db._self, collectionId, function (err, coll) {
+                database = db;
+                getOrCreateCollection(client, database._self, collectionId, function (err, coll) {
                     if (err) {
-                        _context.log(err);
                         callback(err);
+
                     } else {
                         collection = coll;
                         initCallback();

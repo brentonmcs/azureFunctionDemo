@@ -4,7 +4,6 @@
     var dbUtils = require('./docDBUtils');
 
     if (!req.query.username) {
-        context.log(req);
         context.res = {
             status: 400,
             body: "username is required"
@@ -12,10 +11,9 @@
         context.done();
         return;
     }
-    
+
     dbUtils.connect("smiledb", "merchants", context, function () {
 
-        context.log('connected?');
         dbUtils.findArray({
             query: "SELECT * FROM root r  WHERE r.username = @username",
             parameters: [{
@@ -24,7 +22,6 @@
             }]
         }, function (err, results) {
 
-            context.log(results);
             if (err) {
                 context.log(err);
             }
