@@ -4,7 +4,7 @@ var database = null;
 var collection = null;
 var _context;
 var client = new DocumentClient("https://tesdocbmc.documents.azure.com:443/", {
-    masterKey: "vhqzwxpv0w4ThvqA8xt6jBtOIBMTL25FI98Www10c1GSAkL0q9L0A72l4AkAscv0qkgZQPSJvGurENjSXr0F6A=="
+    masterKey: 'vhqzwxpv0w4ThvqA8xt6jBtOIBMTL25FI98Www10c1GSAkL0q9L0A72l4AkAscv0qkgZQPSJvGurENjSXr0F6A=="'
 });
 
 function getOrCreateDatabase(client, databaseId, callback) {
@@ -22,7 +22,7 @@ function getOrCreateDatabase(client, databaseId, callback) {
 
         if (err) {
             _context.log(err);
-            callback(err);
+            _context.done(err);
         } else {
             if (results.length === 0) {
                 client.createDatabase({

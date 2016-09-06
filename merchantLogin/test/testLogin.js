@@ -7,8 +7,8 @@ describe("Color Code Converter", function() {
     log: function (message) {
       console.log(message);
     },
-    done: function() {
-      console.log('done');
+    done: function(err) {
+      console.log('done -' + err);
       done();
     },
     res : function(obj) {
