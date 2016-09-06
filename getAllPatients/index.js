@@ -3,7 +3,7 @@ var collectionId = "Patients";
 
 module.exports = function (context, req) {
 
-    var dbUtils = require('./docdbUtils');
+    var dbUtils = require('../docdbUtils');
 
     dbUtils.connect(databaseId, collectionId, context, function () {
         dbUtils.findArray({

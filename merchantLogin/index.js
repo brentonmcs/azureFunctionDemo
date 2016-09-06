@@ -1,7 +1,7 @@
 ﻿module.exports = function (context, req) {
 
     var jwt = require('jsonwebtoken');
-    var dbUtils = require('./docDBUtils');
+    var dbUtils = require('../docDBUtils');
 
     if (!req.query.username) {
         context.res = {
@@ -23,19 +23,18 @@
         }, function (err, results) {
 
             if (err) {
-                context.log(err);
+                context.done(err);
             }
             if (results.length === 0) {
                 context.res = {
                     status: 400,
                     body: "username or password is incorrect"
                 };
-
             } else {
                 context.res = {
                     status: 200,
                     body: {
-                        token: jwt.sign(result[0], 'supersecret')
+                        token: jwt.sign(results[0], 'supersecret')
                     }
                 };
             }

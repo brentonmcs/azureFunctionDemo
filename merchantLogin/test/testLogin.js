@@ -1,22 +1,30 @@
 var login = require('../index');
+var assert = require('assert');
 
+process.env.DocumentDb = "https://tesdocbmc.documents.azure.com:443/";
+process.env.ApiKey = 'jPeCHS82RKY0XtWeKDIF6cFqFbDExNQlE0tZ06WEEFgYJRrRKJS2JmCaQViWbNzl9DI6N7SCkAFPVV9hfaqY4Q==';
 
-describe("Color Code Converter", function() {
+describe("Merchant Login", function() {
 
-  var context = {
-    log: function (message) {
-      console.log(message);
-    },
-    done: function(err) {
-      console.log('done -' + err);
-      done();
-    },
-    res : function(obj) {
-      console.log(obj);
+  it("logs in successfully", function(done) {
+
+    var assertCallback = function (err) {
+
+      if (err) {
+        done(err);
+      } else {
+        assert.equal(200, this.res.status);
+        done();
+      }
+    };
+    var context = {
+      done :  assertCallback,
+      log : function (message) {
+        console.log(message);
+      },
+      res : {}
     }
-  }
 
-  it("converts the basic colors", function(done) {
     login(context, { query : { "username" : "test123"}});
   });
 
