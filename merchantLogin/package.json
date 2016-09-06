@@ -3,7 +3,9 @@
   "name": "MerchantLogin",
   "private": true,
   "dependencies": {
+    "chai": "^3.5.0",
+    "documentdb": "^1.9.0",
     "jsonwebtoken": "^7.1.9",
-    "documentdb": "^1.9.0"
+    "mocha": "^3.0.2"
   }
 }

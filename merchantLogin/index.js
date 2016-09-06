@@ -12,10 +12,7 @@
         context.done();
         return;
     }
-
-    if (!dbUtils) {
-        context.log('utils not found');
-    }
+    
     dbUtils.connect("smiledb", "merchants", context, function () {
 
         context.log('connected?');
