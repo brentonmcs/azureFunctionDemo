@@ -3,6 +3,7 @@
   "name": "MerchantLogin",
   "private": true,
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "chai": "^3.5.0",
     "documentdb": "^1.9.0",
     "jsonwebtoken": "^7.1.9",
