@@ -73,7 +73,7 @@ var DocDBUtils = {
     },
     insertDocument: function(doc, context, callback) {
         client.createDocument(collection._self, doc, function(err, document) {
-            if(err) return {
+            if(err) {
                 context.log(err);
                 context.done(err);
             }
