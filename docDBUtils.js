@@ -26,6 +26,9 @@ function getOrCreateDatabase(client, databaseId, callback) {
                 };
 
                 client.createDatabase(databaseSpec, function (err, created) {
+                    if (err) {
+                        _context.done(err);
+                    }
                     callback(null, created);
                 });
 
