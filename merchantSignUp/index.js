@@ -1,7 +1,7 @@
 module.exports = function (context, req) {
 
     var dbUtils = require('../docDBUtils');
-    var bcrypt = require('bcrypt');
+    var bcrypt = require('bcrypt-nodejs');
     const saltRounds = 10;
 
     if (req.body.name && req.body.username && req.body.password) {
