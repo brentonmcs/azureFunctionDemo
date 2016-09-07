@@ -71,13 +71,13 @@ var DocDBUtils = {
     findArray: function (query, callback) {
         client.queryDocuments(collection._self, query).toArray(callback);
     },
-    insertDocument(function(doc, callback) {
+    insertDocument: function(doc, callback) {
         client.createDocument(collection._self, doc, function(err, document) {
             if(err) return {
                 _context.done(err);
             }
             _context.log('Created Document with content: ', document.content);
-        });
+        };
     })
     connect: function (databaseId, collectionId, context, initCallback) {
         _context = context;
