@@ -78,7 +78,7 @@ var DocDBUtils = {
                 context.done(err);
             }
             context.log('Created Document with content: ', document.content);
-        };
+        });
     })
     connect: function (databaseId, collectionId, context, initCallback) {
         _context = context;
