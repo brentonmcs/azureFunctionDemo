@@ -74,6 +74,7 @@ var DocDBUtils = {
     insertDocument: function(doc, context, callback) {
         client.createDocument(collection._self, doc, function(err, document) {
             if(err) return {
+                context.log(err);
                 context.done(err);
             }
             context.log('Created Document with content: ', document.content);
