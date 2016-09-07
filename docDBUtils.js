@@ -49,7 +49,6 @@ function getOrCreateCollection(client, databaseLink, collectionId, callback) {
         if (err) {
             _context.log(err);
             _context.done(err);
-
         } else {
             if (results.length === 0) {
                 var collectionSpec = {
@@ -67,6 +66,8 @@ function getOrCreateCollection(client, databaseLink, collectionId, callback) {
 var DocDBUtils = {
 
     findArray: function (query, callback) {
+
+        _context.log('test');
         client.queryDocuments(collection._self, query).toArray(callback);
     },
     connect: function (databaseId, collectionId, context, initCallback) {
