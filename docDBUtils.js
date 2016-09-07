@@ -66,7 +66,6 @@ function getOrCreateCollection(client, databaseLink, collectionId, callback) {
 var DocDBUtils = {
 
     findArray: function (query, callback) {
-
         _context.log('test');
         client.queryDocuments(collection._self, query).toArray(callback);
     },
