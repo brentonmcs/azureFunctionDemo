@@ -72,6 +72,7 @@ var DocDBUtils = {
         client.queryDocuments(collection._self, query).toArray(callback);
     },
     insertDocument: function(doc, context, callback) {
+        context.log('test');
         client.createDocument(collection._self, doc, function(err, document) {
             if(err) {
                 context.log(err);
