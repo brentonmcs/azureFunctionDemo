@@ -4,6 +4,7 @@ module.exports = function (context, req) {
     var bcrypt = require('bcrypt-nodejs');
     const saltRounds = 10;
 
+    context.log(req);
     if (req.body.name && req.body.username && req.body.password) {
         dbUtils.connect("smiledb", "merchants", context, function () {
 
