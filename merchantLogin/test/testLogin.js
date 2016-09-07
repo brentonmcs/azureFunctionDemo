@@ -14,6 +14,8 @@ describe("Merchant Login", function() {
         done(err);
       } else {
         assert.equal(200, this.res.status);
+        assert.equal(1, this.res.body.id);
+        assert.equal('duface', this.res.body.name);
         done();
       }
     };

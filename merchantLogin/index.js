@@ -24,6 +24,7 @@
 
             if (err) {
                 context.done(err);
+                return;
             }
             if (results.length === 0) {
                 context.res = {
@@ -31,9 +32,13 @@
                     body: "username or password is incorrect"
                 };
             } else {
+
+                var merchant = results[0];
                 context.res = {
                     status: 200,
                     body: {
+                        "id" : merchant.id,
+                        "name" : merchant.name,
                         token: jwt.sign(results[0], 'supersecret')
                     }
                 };

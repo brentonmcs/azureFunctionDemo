@@ -48,7 +48,7 @@ function getOrCreateCollection(client, databaseLink, collectionId, callback) {
     client.queryCollections(databaseLink, querySpec).toArray(function (err, results) {
         if (err) {
             _context.log(err);
-            callback(err);
+            _context.done(err);
 
         } else {
             if (results.length === 0) {
@@ -85,8 +85,7 @@ var DocDBUtils = {
                 database = db;
                 getOrCreateCollection(client, database._self, collectionId, function (err, coll) {
                     if (err) {
-                        callback(err);
-
+                        _context.done(err);
                     } else {
                         collection = coll;
                         initCallback();
