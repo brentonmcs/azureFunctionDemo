@@ -15,6 +15,7 @@ module.exports = function (context, req) {
                 bcrypt.hash(req.body.password, salt, function (err, hash) {
                     doc.passwordHash = hash;
 
+                    context.log(doc);
                     dbUtils.insertDocument(doc,context, function() {
                         context.done();
                     });
