@@ -14,6 +14,7 @@
 
     dbUtils.connect("smiledb", "merchants", context, function () {
 
+        context.log(req.query.username);
         dbUtils.findArray({
             query: "SELECT * FROM root r  WHERE r.username = @username",
             parameters: [{
